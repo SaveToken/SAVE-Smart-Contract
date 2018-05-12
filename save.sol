@@ -217,6 +217,23 @@ contract SaveToken is ERC20, Ownable {
 	}
 
 	/**
+	 * @dev Method for getting the eth to token ratio (useful in testing)
+	 */
+	function getEthToToken () public onlyOwner returns (uint256) {
+		return ethToToken;
+	}
+
+	/**
+	 * @dev Allows the owner to change the token exchange rate.
+	 * @param ett the new eth to token ration
+	 */
+	function setEthToToken(uint256 ett) public onlyOwner returns (uint256) {
+		require(ett != 0);
+		ethToToken = ett;
+		return getEthToToken();
+	}
+
+	/**
 	 * @dev transfer token for a specified address
 	 * @param _to The address to transfer to.
 	 * @param _value The amount to be transferred.
